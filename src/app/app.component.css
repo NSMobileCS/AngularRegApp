@@ -1,0 +1,23 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.ng-valid {
+    background-color: #b1ffaa;
+}
+
+.ng-invalid {
+    background-color: #ff7777;
+}
+
+.widebutton {
+    text-align: center;
+    display: inline-block;
+    margin: 35px auto 35px auto;
+    padding: 15px auto 15px auto;
+    height: 50px;
+    width: 120px;
+    color: green;
+}
+

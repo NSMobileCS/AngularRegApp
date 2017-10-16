@@ -1,20 +1,89 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+<h1>Registration</h1>
+<hr><hr>
+<h2>Account Information</h2>
+<form (submit)="popMessageifValid()">
+  <label>
+    First Name
+    <input type="text" name='first_name' 
+      [(ngModel)]='user.first_name' required
+      minlength="2" maxlength="20" #firstname="ngModel"
+      pattern="^[A-Z]+\w+\Z" >
 
+  </label>
+  <p *ngIf="!firstname.valid && user.submitpressed">
+    first name not valid
+  </p>
+  <hr>
+
+  <label>
+    Last Name
+    <input type="text" name='last_name'
+      [(ngModel)]='user.last_name' required
+      minlength="2" maxlength="20" #lastname="ngModel"
+      pattern="^[A-Z]{1}\w+\Z" >
+  </label>
+  <p *ngIf="!lastname.valid && user.submitpressed">
+    last name not valid
+  </p>
+  <hr>
+
+  <label>
+    Email address
+    <input type="email" name='email' required #email="ngModel"
+    [(ngModel)]='user.email' minlength="4" pattern="\w+@\w+\.\w+">
+    <p *ngIf="!email.valid && user.submitpressed">
+      invalid email
+    </p>
+  </label>
+  <hr>
+
+  <label>
+    Password
+    <input type="password" name='password' required
+    [(ngModel)]='user.password' minlength="6" maxlength="60">
+    <p *ngIf="user.submitpressed && !password.valid">
+      password not valid
+    </p>
+  </label><hr>
+  
+  <label>
+    Confirm Password
+    <input type="password" name='pw_confirm' required #pwconfirm="ngModel"
+    [(ngModel)]='user.pw_confirm' minlength="6" maxlength="60">
+    <p *ngIf="user.submitpressed && pwconfirm.valid && pwMatches()">
+      Password confirm error
+    </p>
+  </label><hr>
+
+  <label>
+    Address
+    <input type='text' name='address' pattern="\d+\s+\w+"
+    [(ngModel)]='user.address' #address="ngModel" required>
+    <p *ngIf="user.submitpressed && !address.valid">
+      Invalid address
+    </p>
+  </label><hr>
+
+  <label>
+    City
+    <input type='text' name='city' required
+    [(ngModel)]='user.city' #city="ngModel" >
+    <p *ngIf="user.submitpressed && !city.valid">
+      City not valid?
+    </p>
+  </label><hr>
+
+  <label>
+    State
+    <select name='state' [(ngModel)]='user.state'>
+      <option *ngFor='let state of allUSStates'>
+        {{ state }}
+      </option>
+    </select>
+  </label><hr>
+
+  <input type="submit" name='submit' class='widebutton' value="Submit!">
+
+</form>
